@@ -30,12 +30,20 @@
 			min-height: 5rem;
         }
 		.joke button {
-            background-color: black;
-			padding: 2rem;
 			transition: background-color 0.5s ease-in-out;
+			background-color: #800080; /* purple */
+		    color: #fff; /* white */
+		    padding: 10px 20px;
+		    border: none;
+		    border-radius: 5px;
+		    font-size: 16px;
+		    font-weight: bold;
+		    cursor: pointer;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* adds a shadow effect */
         }
 		.joke button:hover {
-		  background-color: #ff69b4;
+		  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* adds a darker shadow effect on hover */
+		  color: #fff; /* white */
 		  transition: background-color 0.5s ease-in-out;
 		}
 		.badge {
