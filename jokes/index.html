@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tell Me A Joke</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.9s ease-out;
+			background-color:  brown;
+			text-align: center;
+        }
+		#jokeContainer{
+			display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+			
+		}
+		.joke{
+			align-self: center;
+			width: 75vw;
+		}
+		.joke h1 {
+			transition: all 1.2s linear;
+		}
+        .joke h1, .joke button {
+            color: white;
+			min-height: 5rem;
+        }
+		.joke button {
+            background-color: black;
+			padding: 2rem;
+			transition: background-color 0.5s ease-in-out;
+        }
+		.joke button:hover {
+		  background-color: #ff69b4;
+		  transition: background-color 0.5s ease-in-out;
+		}
+		.badge {
+		  background-color: #4CAF50; /* green */
+		  color: #fff; /* white */
+		  padding: 5px 10px;
+		  border-radius: 5px;
+		  font-size: 12px;
+		  font-weight: bold;
+		  text-align: center;
+		  cursor: pointer;
+		}
+
+		.badge:hover {
+		  background-color: #3e8e41; /* darker green */
+		}
+    </style>
+</head>
+<body>
+    <div id="jokeContainer">
+        <div class="joke">
+			<span class="badge" id="joke-cat">...</span>
+            <h1 id="joke-text">Loading Joke here...</h1>
+            <button id="joke-btn" onclick="getJoke()">Next Joke</button>
+        </div>
+    </div>
+    <script>
+        let currentIndex = 0;
+		const jokeText = document.getElementById("joke-text");	
+		const jokeBtn = document.getElementById("joke-btn");
+		const jokeCat = document.getElementById("joke-cat");			
+		async function getJoke() {
+			jokeBtn.disabled = true
+			jokeBtn.textContent = 'loading...'
+			const response = await fetch('https://v2.jokeapi.dev/joke/Any?format=json&type=single&blacklistFlags=nsfw,religious,racist,sexist,explicit');
+			const data = await response.json();
+			jokeText.innerHTML = data.joke;
+			jokeCat.innerHTML = data.category;
+			currentIndex = (currentIndex + 1) % colors.length;
+			document.body.style.backgroundColor = colors[currentIndex];
+			jokeBtn.disabled = false
+			jokeBtn.textContent = 'Next Joke.'
+		} 
+
+        const colors = [
+            "#f44336", // red
+            "#e91e63", // deep purple
+            "#9c27b0", // indigo
+            "#673ab7", // violet
+            "#3f51b5"  // blue
+        ];
+		
+		getJoke();
+    </script>
+</body>
+</html>
