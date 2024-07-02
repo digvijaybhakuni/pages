@@ -138,6 +138,7 @@ let aiTurn = () => {
     // Display the updated game board
     cellMove = document.getElementById(`cell-${bestMove}`);
 	cellMove.innerHTML = board[bestMove];
+	cellMove.classList.remove("cell-X");
 	cellMove.classList.add("cell-O");
 
     // Check if the AI has won
@@ -164,6 +165,7 @@ let userTurn = (move) => {
 		// Display the updated game board
 		cellMove = document.getElementById(`cell-${move}`);
 		cellMove.innerHTML = board[move];
+		cellMove.classList.remove("cell-O");
 		cellMove.classList.add("cell-X");
 		// Check if the user has won
 		if (checkWin(board, 'X')) {
